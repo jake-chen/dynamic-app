@@ -1,0 +1,57 @@
+<!-- simple-todos.html -->
+<head>
+  <title>Jake's todos</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
+      {{#if isAdmin}}
+        {{#each buttonList}}
+          {{> Template.dynamic template=this}}
+        {{/each}}
+      {{/if}}
+      
+      <label class="hide-completed">
+        <input type="checkbox" id="hideCompletedCheck" checked="{{hideCompleted}}"/>
+        Hide Completed Tasks
+      </label>
+      {{> loginButtons}}
+      <!--adding a form!-->
+      {{> addForm}}
+      
+    </header>
+
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name='addForm'>
+  <form class = "new-task">
+    <div class="form-group">
+      <input type="text" name="text" placeholder="Add a new task" />  
+    </div>
+    <button type="submit" class="btn-default">Submit</button>
+  </form>
+</template>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}}">
+    <button class="delete">&times;</button>
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    <span class="text">{{text}}</span>
+    
+    <p class="dt"> {{createdAt}}</p>
+  </li>
+</template>
+
+<template name="cleardbs">
+  <button class="clearAll">Clear All</button>
+</template>
